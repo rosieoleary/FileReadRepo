@@ -59,8 +59,8 @@ public class readFile {
 	String[] personArray = personpetArray[0].split("%");
 	String[] person1Array = personArray[0].split("\n");//seperates information per line
 	
-	person1Array[0]=person1Array[0].replaceAll("﻿", "");
-	person1Array[3]=person1Array[3].replaceAll("£", "");
+	person1Array[0]=person1Array[0].replaceAll("ï»¿", "");
+	person1Array[3]=person1Array[3].replaceAll("Â£", "");
 	//System.out.println(person1Array[0]);
 	
 	String StrSalary1=person1Array[3];
@@ -71,10 +71,10 @@ public class readFile {
 	
 	Person p1 = new Person (person1Array[0], person1Array[1], person1Array[2], salary1);
 	PersonList.add(p1);
-	//System.out.println("Person 1: \n"+p1.getName()+"\n" + p1.getDob()+"\n"+p1.getOccupation()+"\n�"+p1.getSalary());
+	//System.out.println("Person 1: \n"+p1.getName()+"\n" + p1.getDob()+"\n"+p1.getOccupation()+"\n£"+p1.getSalary());
 	
 	String[] person2Array = personArray[1].split("\n");
-	person2Array[4]=person2Array[4].replaceAll("£", "");
+	person2Array[4]=person2Array[4].replaceAll("Â£", "");
 	String StrSalary2=person2Array[4];
 	int salary2 = Integer.parseInt(StrSalary2);
 	
@@ -82,10 +82,10 @@ public class readFile {
 	
 	Person p2 = new Person (person2Array[1], person2Array[2], person2Array[3], salary2);
 	PersonList.add(p2);
-	//System.out.println("\n\nPerson 2:\n"+p2.getName()+"\n" + p2.getDob()+"\n"+p2.getOccupation()+"\n�"+p2.getSalary());
+	//System.out.println("\n\nPerson 2:\n"+p2.getName()+"\n" + p2.getDob()+"\n"+p2.getOccupation()+"\n£"+p2.getSalary());
 	String[] person3Array = personArray[2].split("\n");
 	
-	person3Array[4]=person3Array[4].replaceAll("£", "");
+	person3Array[4]=person3Array[4].replaceAll("Â£", "");
 	
 	String StrSalary3=person3Array[4].toString();
 	int salary3 =Integer.parseInt(StrSalary3);
@@ -94,7 +94,7 @@ public class readFile {
 	
 	Person p3 = new Person (person3Array[1], person3Array[2], person3Array[3], salary3);
 	PersonList.add(p3);
-	//System.out.println("\n\nPerson 3:\n"+p3.getName()+"\n" + p3.getDob()+"\n"+p3.getOccupation()+"\n�"+p3.getSalary());
+	//System.out.println("\n\nPerson 3:\n"+p3.getName()+"\n" + p3.getDob()+"\n"+p3.getOccupation()+"\n£"+p3.getSalary());
 	
 	//System.out.println(person1Array[1]);
 	
@@ -114,16 +114,33 @@ public class readFile {
 		p.ownPet(a);
 	}
 	
-	public static void findSalary(String salspecies){
-		
-		for(int i=0;i<PersonList.size();i++){
-			for (int j=0; j < PersonList.get(i).getPets().size();j++){
-				int [] SalaryArray = new int [i];
-				if(PersonList.get(i).getPets().get(j).getSpecies().equals(salspecies))
-				
-				System.out.println("People who own a "+salspecies+ " can earn �"+PersonList.get(i).getSalary());
+	public static void findSalary(String salspecies) {
+		ArrayList<Integer> SalaryArray = new ArrayList<Integer>();
+		for (int i = 0; i < PersonList.size(); i++) {
+
+			
+			for (int j = 0; j < PersonList.get(i).getPets().size(); j++) {
+
+				if (PersonList.get(i).getPets().get(j).getSpecies().equals(salspecies)) {
+					SalaryArray.add(PersonList.get(i).getSalary());
+					//System.out.println(PersonList.get(i).getPets().get(j).getSpecies());
+					// System.out.println("People who own a "+salspecies+ " can
+					// earn £"+PersonList.get(i).getSalary());
+				}
+			
+				// System.out.println(result);
 			}
 		}
+			int result = 0;
+			for (int k = 0; k < SalaryArray.size(); k++) {
+				if (SalaryArray.size()>1){
+				System.out.println(SalaryArray.get(k));
+				result = SalaryArray.get(k+1)+SalaryArray.get(k);
+				k=k+1;}
+				else{result=SalaryArray.get(k);}
+		}
+			float average = result/SalaryArray.size();
+			System.out.println("The average salary of someone who owns a "+salspecies+" is £"+average);
 	}
 	public static void findOccupation(String occupspecies){
 		
