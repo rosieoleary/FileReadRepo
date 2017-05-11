@@ -1,0 +1,1 @@
+This is a project that reads information from a file and creates objects
